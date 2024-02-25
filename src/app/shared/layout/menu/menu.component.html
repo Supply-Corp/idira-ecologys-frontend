@@ -1,0 +1,49 @@
+<div class="temp-menu">
+
+  <div class="grid justify-center">
+    <img srcset="/assets/images/logo.webp" width="80" alt="">
+  </div>
+
+  <div class="content-avatar">
+    <div class="avatar">
+      <img srcset="/assets/images/logo_pyx.png" alt="">
+    </div>
+    <span>CORPORACIÓN PYX S.A.C.</span>
+  </div>
+
+  <div class="menu">
+
+    <button class="item" routerLink="/home" routerLinkActive="select" [routerLinkActiveOptions]="{exact:true}">
+      <mat-icon>speed</mat-icon>
+      Anuncios
+    </button>
+    <button class="item" class="item" routerLink="/home/sedes" routerLinkActive="select"  >
+      <mat-icon>folder</mat-icon>
+      Documentos
+    </button>
+    <button class="item" routerLink="/home/activities" routerLinkActive="select">
+      <mat-icon>auto_stories</mat-icon>
+      Actividades Mensuales
+    </button>
+
+    <button class="item"  routerLink="/home/profile" routerLinkActive="select">
+      <mat-icon>person</mat-icon>
+      Datos de Perfil
+    </button>
+
+  </div>
+
+  <div class="content-media">
+    <button matTooltip="Facebook" (click)="goTo('https://www.facebook.com/Solugrifos')" >
+      <img srcset="/assets/images/facebook_white.svg" alt="">
+    </button>
+
+    <button matTooltip="Instagram" (click)="goTo('https://www.instagram.com/solugrifosperu/')">
+      <img srcset="/assets/images/instagram_white.svg" alt="">
+    </button>
+
+    <button matTooltip="Linkedin" (click)="goTo('https://www.linkedin.com/company/solugrifosperu/')">
+      <img srcset="/assets/images/linkedin_white.svg" alt="">
+    </button>
+  </div>
+</div>

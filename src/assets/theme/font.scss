@@ -1,0 +1,37 @@
+
+$font-url-thin: '../font/Roboto-Thin.ttf';
+$font-url-light: '../font/Roboto-Light.ttf';
+$font-url-regular: '../font/Roboto-Regular.ttf';
+$font-url-medium: '../font/Roboto-Medium.ttf';
+$font-url-bold: '../font/Roboto-Bold.ttf';
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('#{$font-url-thin}') format('truetype');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('#{$font-url-light}') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('#{$font-url-regular}') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('#{$font-url-medium}') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('#{$font-url-bold}') format('truetype');
+  font-weight: 700;
+}
+

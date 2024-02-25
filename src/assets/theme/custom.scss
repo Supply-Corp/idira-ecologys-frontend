@@ -1,0 +1,93 @@
+@import "font.scss";
+@import "base.scss";
+
+:root {
+  --green: rgb(136, 171, 46);
+  --green-light: #9dc140;
+  --gray: #dde6e9;
+  --dark-gray: #373A40;
+  --light-gray: #EDEEF1;
+  --black:#222;
+}
+
+
+.form-group{
+  position: relative;
+  display: grid;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.input {
+  outline: none;
+  background-color: white;
+  border: none;
+  padding: 7px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  outline: 1.5px solid var(--gray);
+}
+
+.input-icon{
+  position: absolute;
+  color: var(--gray) !important;
+  font-size: 18px;
+  height: 18px !important;
+  width: 18px !important;
+}
+
+
+.input-icon-left{
+  .input{
+    padding-left: 25px;
+  }
+  .input-icon{
+    left: 3px;
+  }
+}
+
+.input-icon-right{
+  .input{
+    padding-right: 25px;
+  }
+  .input-icon{
+    right: 10px;
+  }
+}
+
+
+
+// * BUTTONS
+
+.btn{
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--green);
+  padding: 6px 25px;
+  width: max-content;
+  height: max-content;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &-green {
+    @extend .btn;
+    background-color: var(--green);
+    color: white;
+  }
+
+
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}

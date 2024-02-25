@@ -1,0 +1,17 @@
+.temp-home{
+  height: 100%;
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+.header{
+  height: max-content;
+}
+.menu{
+  width: max-content;
+}
+.main{
+  display: grid;
+  grid-template-rows: max-content max-content auto;
+  height: 100%;
+}

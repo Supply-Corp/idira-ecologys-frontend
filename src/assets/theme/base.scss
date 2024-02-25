@@ -1,0 +1,113 @@
+
+@function calculateRem($size) {
+  $remSize: calc($size / 16px);
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+  line-height: calculateRem($size)*1.5;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  @include font-size(16px);
+  scrollbar-width: thin !important;
+  scrollbar-color: #00BCD4 #090c1073 !important;
+
+  *::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #090c1073;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--green);
+    border-radius: 20px;
+    // border: 3px solid rgba(69,69,69,.09);
+  }
+}
+
+
+html {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  height: 100%;
+  overflow-y: auto;
+  font-family: "Roboto";
+  color: var(--dark-gray);
+  @include font-size(15px);
+  position: relative;
+  background-color: white !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  @include font-size(21px)
+}
+
+h2 {
+  @include font-size(19px)
+}
+
+h3 {
+  @include font-size(17px)
+}
+
+h4 {
+  @include font-size(15px)
+}
+
+h5, p {
+  @include font-size(13px)
+}
+
+@media (width < 500px) {
+
+  h1 {
+    @include font-size(20px)
+  }
+
+  h2 {
+    @include font-size(18px)
+  }
+
+  h3 {
+    @include font-size(16px)
+  }
+
+  h4 {
+    @include font-size(14px)
+  }
+
+  h5, p {
+    @include font-size(12px)
+  }
+
+}

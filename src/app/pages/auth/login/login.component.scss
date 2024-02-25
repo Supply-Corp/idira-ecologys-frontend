@@ -1,0 +1,56 @@
+.temp-login{
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: linear-gradient( 180deg, rgb(22 21 21 / 35%) 0%, rgb(0 0 0 / 19%) 100%), url(/assets/images/background_auth.webp);
+  display: grid;
+  grid-template-rows: auto max-content;
+
+  .main{
+    padding: 20px 40px;
+    display: grid;
+    gap: 30px;
+    #btn_solugrifos{
+      filter: drop-shadow(4px 3px 0px #000);
+
+      img{
+        width: 300px;
+      }
+    }
+    grid-template-rows: max-content auto;
+
+    .card{
+      min-width: 380px;
+      align-self: center;
+      justify-self: end;
+      display: grid;
+      gap: 15px;
+      background-color: white;
+      width: max-content;
+      height: max-content;
+      padding: 40px 30px;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+}
+
+  }
+
+  footer{
+    background-color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    button{
+      img{
+        width: 60px;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div class="temp-header">
+  <div class="flex justify-between">
+    <div class="flex">
+      <button class="btn-menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center gap-2" aria-label="Example icon-button with a menu">
+      <div class="avatar">
+        <img srcset="/assets/images/logo_pyx.png" alt="">
+      </div>
+      <span class="title">CORPORACIÓN PYX S.A.C.</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div class="grid gap-1">
+        <div class="content-info-user">
+          <div class="avatar">
+            <img srcset="/assets/images/logo_pyx.png" alt="">
+          </div>
+          <span class="text-sm text-center text-white" >CORPORACIÓN PYX S.A.C.</span>
+        </div>
+
+        <div class="content-logout">
+          <button class="btn !bg-white" routerLink="/" >Cerrar sesión</button>
+        </div>
+      </div>
+    </mat-menu>
+  </div>
+</div>
