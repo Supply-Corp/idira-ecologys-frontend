@@ -1,0 +1,12 @@
+.temp-user{
+  padding: 10px 50px;
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+::ng-deep{
+  .mat-mdc-table{
+    border-top: 2px solid var(--green-light) !important;
+  }
+}

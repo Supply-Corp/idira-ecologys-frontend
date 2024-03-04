@@ -1,0 +1,51 @@
+<div class="temp-user">
+  <h1 class="text-center font-semibold">Usuarios</h1>
+
+  <div class="flex w-full justify-end ">
+      <button class="btn-green" routerLink="/home/users/manage">
+        Crear
+      </button>
+  </div>
+
+  <div class="grid">
+    <table mat-table [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Rol </th>
+        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="opt">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="flex gap-2">
+            <button class="btn-green btn-icon" matTooltip="Editar"> <mat-icon>edit</mat-icon> </button>
+            <button class="btn-red btn-icon" matTooltip="Eliminar"> <mat-icon>delete_forever</mat-icon> </button>
+          </div>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+</div>
