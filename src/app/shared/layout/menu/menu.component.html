@@ -12,12 +12,14 @@
   </div>
 
   <div class="menu">
+    @for (item of menuList; track $index) {
+      <button class="item" [routerLink]="item.url" routerLinkActive="select" [routerLinkActiveOptions]="{exact:item.extact}">
+        <mat-icon> {{item.icon}} </mat-icon>
+        {{item.title}}
+      </button>
+    }
 
-    <button class="item" routerLink="/home" routerLinkActive="select" [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon>speed</mat-icon>
-      Anuncios
-    </button>
-    <button class="item" class="item" routerLink="/home/sedes" routerLinkActive="select"  >
+    <!-- <button class="item" class="item" routerLink="/home/sedes" routerLinkActive="select"  >
       <mat-icon>folder</mat-icon>
       Documentos
     </button>
@@ -29,7 +31,7 @@
     <button class="item"  routerLink="/home/profile" routerLinkActive="select">
       <mat-icon>person</mat-icon>
       Datos de Perfil
-    </button>
+    </button> -->
 
   </div>
 
