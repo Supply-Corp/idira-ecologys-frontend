@@ -2,6 +2,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths":{
+      "@interfaces/*":["./src/app/shared/interfaces/*"],
+      "@services/*":["./src/app/shared/services/*"],
+      "@shared/*":["./src/app/shared/*"],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

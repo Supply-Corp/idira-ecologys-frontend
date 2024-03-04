@@ -8,6 +8,8 @@
   --dark-gray: #373A40;
   --light-gray: #EDEEF1;
   --black:#222;
+  --red: #F86060;
+
 }
 
 
@@ -16,6 +18,12 @@
   display: grid;
   align-items: center;
   margin-bottom: 25px;
+
+  label{
+    font-size: 14px;
+    color: var(--dark-gray);
+    font-weight: 500;
+  }
 }
 
 .input {
@@ -59,7 +67,10 @@
   }
 }
 
-
+.content-title{
+  display: grid;
+  grid-template-columns: max-content auto;
+}
 
 // * BUTTONS
 
@@ -83,7 +94,53 @@
     color: white;
   }
 
+  &-red{
+    @extend .btn;
+    background-color: var(--red);
+    color: white;
+  }
 
+  &-icon{
+    @extend .btn;
+    display: grid;
+    place-content: center;
+    padding: 5px !important;
+  }
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+
+// * CARD
+
+.card{
+  padding: 20px;
+  box-shadow: -3px 1px 11px 1px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  .title{
+    position: absolute;
+    top: -10px;
+    left: 22px;
+    font-size: 14px;
+    background-color: white;
+    padding: 2px 5px;
+    box-shadow: 1px -3px 6px 0px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+
+  .body{
+    padding: 10px;
+    display: grid;
+    gap: 15px;
+  }
 
   border-radius: 10px;
   -webkit-border-radius: 10px;
