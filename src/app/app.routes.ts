@@ -14,8 +14,55 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home/dashboard/dashboard.component')
       },
       {
+        path:'companies',
+        children:[
+          {
+            path:'',
+            loadComponent: () => import('./pages/home/company/company.component')
+          },
+          {
+            path:'manage',
+            loadComponent: () => import('./pages/home/company/company_manage/company_manage.component')
+          },
+          {
+            path:'manage/:id',
+            loadComponent: () => import('./pages/home/company/company_manage/company_manage.component')
+          }
+        ]
+      },
+      {
         path:'sedes',
-        loadComponent: () => import('./pages/home/sedes/sedes.component')
+        children:[
+          {
+            path:'',
+            loadComponent: () => import('./pages/home/sedes/sedes.component')
+          },
+          {
+            path:'manage',
+            loadComponent: () => import('./pages/home/sedes/sedes_manage/sedes_manage.component')
+          },
+          {
+            path:'manage/:id',
+            loadComponent: () => import('./pages/home/sedes/sedes_manage/sedes_manage.component')
+          }
+        ]
+      },
+      {
+        path:'users',
+        children:[
+          {
+            path:'',
+            loadComponent: () => import('./pages/home/users/users.component')
+          },
+          {
+            path:'manage',
+            loadComponent: () => import('./pages/home/users/user_manage/user_manage.component')
+          },
+        ]
+      },
+      {
+        path:'documents',
+        loadComponent: () => import('./pages/home/documents/documents.component')
       },
       {
         path:'activities',
@@ -25,6 +72,10 @@ export const routes: Routes = [
         path:'profile',
         loadComponent: () => import('./pages/home/profile/profile.component')
       },
+      {
+        path:'**',
+        loadComponent: () => import('./pages/home/dashboard/dashboard.component')
+      }
     ]
   }
 ];
