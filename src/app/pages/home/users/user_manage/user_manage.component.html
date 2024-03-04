@@ -1,0 +1,41 @@
+<div class="temp-user-manage">
+  <div class="content-title">
+    <button class="justify-self-start" routerLink="/home/users"> <mat-icon>arrow_back</mat-icon> </button>
+    <h1 class="text-center font-semibold">Usuario</h1>
+  </div>
+
+  <div class="card">
+    <div class="title">Datos principales</div>
+
+    <div class="body !py-7">
+      <div class="section">
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input class="input" type="text">
+        </div>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input class="input" type="text">
+        </div>
+      </div>
+
+      <div class="w-1/2 pr-3">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Rol</mat-label>
+            <mat-select>
+              <mat-option value="volvo">ADMIN</mat-option>
+              <mat-option value="saab">USER</mat-option>
+              <mat-option value="mercedes">SEDE</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <span></span>
+      </div>
+
+      <div class="flex w-full mt-5 justify-end">
+        <button class="btn-green"> Crear </button>
+      </div>
+    </div>
+  </div>
+</div>
