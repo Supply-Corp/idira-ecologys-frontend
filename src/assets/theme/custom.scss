@@ -12,6 +12,12 @@
 
 }
 
+.text-error {
+  position: absolute;
+  bottom: -18px;
+  color: red;
+  margin: 0 !important;
+}
 
 .form-group{
   position: relative;
@@ -83,6 +89,9 @@
   padding: 6px 25px;
   width: max-content;
   height: max-content;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 
   &:focus-visible {
     outline: none;
@@ -147,4 +156,11 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+
+.spinner{
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
 }

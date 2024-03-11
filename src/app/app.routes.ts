@@ -33,18 +33,19 @@ export const routes: Routes = [
       {
         path:'sedes',
         children:[
+
           {
-            path:'',
+            path:':id',
             loadComponent: () => import('./pages/home/sedes/sedes.component')
           },
           {
-            path:'manage',
+            path:':id/manage',
             loadComponent: () => import('./pages/home/sedes/sedes_manage/sedes_manage.component')
           },
           {
-            path:'manage/:id',
+            path:':id/manage/:sedeId',
             loadComponent: () => import('./pages/home/sedes/sedes_manage/sedes_manage.component')
-          }
+          },
         ]
       },
       {

@@ -14,7 +14,7 @@
   <div class="menu">
     @for (item of menuList; track $index) {
       <button class="item" [routerLink]="item.url" routerLinkActive="select" [routerLinkActiveOptions]="{exact:item.extact}">
-        <mat-icon> {{item.icon}} </mat-icon>
+        <mat-icon class="material-symbols-rounded" > {{item.icon}} </mat-icon>
         {{item.title}}
       </button>
     }

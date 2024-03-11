@@ -1,6 +1,6 @@
 <div class="temp-company-manage">
   <div class="content-title">
-    <button class="justify-self-start" routerLink="/home/companies"> <mat-icon>arrow_back</mat-icon> </button>
+    <button class="justify-self-start" routerLink="/home/companies"> <mat-icon class="material-symbols-rounded" >arrow_back</mat-icon> </button>
     <h1 class="text-center font-semibold">Empresa</h1>
   </div>
 
@@ -8,116 +8,137 @@
     <div class="title">Datos principales</div>
 
     <div class="body !py-7">
-      <div class="section">
-        <div class="form-group">
-          <label for="">Nombre</label>
-          <input class="input" type="text">
+      <ng-container [formGroup]="formCompany" >
+        <div class="section">
+          <div class="form-group">
+            <label for="">Nombre</label>
+            <input class="input" formControlName="name" type="text">
+            <p *ngIf="getTypeError('name', 'required', '')" class="text-error"> campo requerido </p>
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input class="input" formControlName="email" type="text">
+            <p *ngIf="getTypeError('email', 'required', '')" class="text-error"> campo requerido </p>
+            <p *ngIf="getTypeError('email', 'email', '')" class="text-error"> formato de correo incorrecto </p>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="">Email</label>
-          <input class="input" type="text">
-        </div>
-      </div>
 
-      <div class="section">
-        <div class="form-group">
-          <label for="">Razón Social</label>
-          <input class="input" type="text">
-        </div>
-        <div class="form-group">
-          <label for="">Ruc</label>
-          <input class="input" type="text">
-        </div>
-      </div>
+        <div class="section">
+          <div class="form-group">
+            <label for="">Razón Social</label>
+            <input class="input" formControlName="razon_social" type="text">
+            <p *ngIf="getTypeError('razon_social', 'required', '')" class="text-error"> campo requerido </p>
+          </div>
+          <div class="form-group">
+            <label for="">Ruc</label>
+            <input class="input" formControlName="ruc" type="text">
+            <p *ngIf="getTypeError('ruc', 'required', '')" class="text-error"> campo requerido </p>
 
-      <div class="section">
-        <div class="form-group">
-          <label for="">Distrito</label>
-          <input class="input" type="text">
+          </div>
         </div>
-        <div class="form-group">
-          <label for="">Provincia</label>
-          <input class="input" type="text">
-        </div>
-      </div>
 
-      <div class="w-1/2 pr-3">
-        <div class="form-group">
-          <label for="">Dirección</label>
-          <input class="input" type="text">
+        <div class="section">
+          <div class="form-group">
+            <label for="">Distrito</label>
+            <input class="input" formControlName="distrito" type="text">
+            <p *ngIf="getTypeError('distrito', 'required', '')" class="text-error"> campo requerido </p>
+
+          </div>
+          <div class="form-group">
+            <label for="">Provincia</label>
+            <input class="input" formControlName="provincia" type="text">
+            <p *ngIf="getTypeError('provincia', 'required', '')" class="text-error"> campo requerido </p>
+          </div>
         </div>
-        <span></span>
-      </div>
+
+        <div class="w-1/2 pr-3">
+          <div class="form-group">
+            <label for="">Dirección</label>
+            <input class="input" formControlName="address" type="text">
+            <p *ngIf="getTypeError('address', 'required', '')" class="text-error"> campo requerido </p>
+          </div>
+          <span></span>
+        </div>
+      </ng-container>
 
       <mat-divider></mat-divider>
 
       <div class="flex justify-around gap-4 pt-8">
-        <div class="card w-full">
+        <div class="card w-full" [formGroup]="formRepresentative">
           <span class="title">Representante</span >
 
           <div class="body">
             <div class="form-group">
               <label for="">Nombre</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="name_representative" type="text">
+              <p *ngIf="getTypeError('name_representative', 'required', 'representative')" class="text-error"> campo requerido </p>
+
             </div>
 
             <div class="form-group">
               <label for="">DNI</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="dni_representative" type="text">
+              <p *ngIf="getTypeError('dni_representative', 'required', 'representative')" class="text-error"> campo requerido </p>
+
             </div>
 
             <div class="form-group">
               <label for="">Email</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="email_representative" type="text">
             </div>
           </div>
         </div>
 
-        <div class="card w-full">
+        <div class="card w-full" [formGroup]="formManager">
           <span class="title">Gerente</span >
 
           <div class="body">
             <div class="form-group">
               <label for="">Nombre</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="name_general_manager" type="text">
+              <p *ngIf="getTypeError('name_general_manager', 'required', 'manager')" class="text-error"> campo requerido </p>
+
             </div>
 
             <div class="form-group">
               <label for="">DNI</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="dni_general_manager" type="text">
+              <p *ngIf="getTypeError('dni_general_manager', 'required', 'manager')" class="text-error"> campo requerido </p>
             </div>
 
             <div class="form-group">
               <label for="">Email</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="email_general_manager" type="text">
             </div>
           </div>
         </div>
 
-        <div class="card w-full">
+        <div class="card w-full" [formGroup]="formSupervisor">
           <span class="title">Supervisor</span >
 
           <div class="body">
             <div class="form-group">
               <label for="">Nombre</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="name_supervisor" type="text">
+              <p *ngIf="getTypeError('name_supervisor', 'required', 'supervisor')" class="text-error"> campo requerido </p>
             </div>
 
             <div class="form-group">
               <label for="">DNI</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="dni_supervisor" type="text">
+              <p *ngIf="getTypeError('dni_supervisor', 'required', 'supervisor')" class="text-error"> campo requerido </p>
             </div>
 
             <div class="form-group">
               <label for="">Email</label>
-              <input class="input" type="text">
+              <input class="input" formControlName="email_supervisor" type="text">
             </div>
           </div>
         </div>
       </div>
 
       <div class="flex w-full mt-5 justify-end">
-        <button class="btn-green"> Crear </button>
+        <button class="btn-green" [disabled]="companyData().loading" (click)="CreateCompany()"> Crear <mat-icon *ngIf="companyData().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon> </button>
       </div>
     </div>
   </div>

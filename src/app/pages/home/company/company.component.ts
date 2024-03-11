@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { CompanyService, CompanyServiceData } from '@services/company.service';
+import { Company } from '@interfaces/companyResponse';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-company',
   standalone: true,
@@ -13,7 +15,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTableModule,
     RouterModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './company.component.html',
   styleUrl: './company.component.scss',
@@ -21,51 +24,23 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 })
 export default class CompanyComponent {
 
+  private companyService = inject(CompanyService);
+
+  constructor(){
+
+  }
+
+  public companyData = this.companyService.companyData;
+
   displayedColumns: string[] = ['name', 'email', 'razon_social', 'ruc', 'distrito', 'provincia', 'address', 'opt'];
   // displayedColumns: string[] = ['Nombre', 'Email', 'Razón Social', 'Ruc', 'Distrito', 'Provincia', 'Dirección'];
-  dataSource = [
-    {
-      "name":"    Dattatech Studio     ",
-      "email": "info@dattatech.com",
-      "razon_social":"Andri Suarez",
-      "ruc":"154776769",
-      "distrito":"lara",
-      "provincia":"barquisimeto",
-      "address":"carrera 7a #17-25",
+  dataSource = computed<Company[]>(()=>this.companyData().companies);
 
-      "name_representative":"andri suarez",
-      "dni_representative":"154776769",
-      "email_representative":"",
-
-      "name_general_manager":"andri suarez",
-      "dni_general_manager":"154776769",
-      "email_general_manager":"",
-
-      "name_supervisor":"andri suarez",
-      "dni_supervisor":"154776769",
-      "email_supervisor":""
-    },
-    {
-      "name":"    Dattatech Studio     ",
-      "email": "info@dattatech.com",
-      "razon_social":"Andri Suarez",
-      "ruc":"154776769",
-      "distrito":"lara",
-      "provincia":"barquisimeto",
-      "address":"carrera 7a #17-25",
-
-      "name_representative":"andri suarez",
-      "dni_representative":"154776769",
-      "email_representative":"",
-
-      "name_general_manager":"andri suarez",
-      "dni_general_manager":"154776769",
-      "email_general_manager":"",
-
-      "name_supervisor":"andri suarez",
-      "dni_supervisor":"154776769",
-      "email_supervisor":""
-    }
-  ];
+  deleteCompany(id:number){
+    this.companyService.delete(id)
+    .subscribe(_=>{
+      this.companyService.get();
+    })
+  }
 
 }

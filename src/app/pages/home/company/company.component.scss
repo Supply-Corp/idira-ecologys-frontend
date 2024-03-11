@@ -10,3 +10,13 @@
     border-top: 2px solid var(--green-light) !important;
   }
 }
+
+::ng-deep{
+  .mat-mdc-progress-spinner{
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .mdc-circular-progress__indeterminate-circle-graphic{
+    stroke: var(--green-light) !important;
+  }
+}
