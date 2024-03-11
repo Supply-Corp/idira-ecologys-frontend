@@ -118,4 +118,29 @@ export default class CompanyManageComponent {
     return formChange.get(field)?.invalid && formChange.get(field)?.touched && formChange.get(field)?.hasError(type)
   }
 
+  getInputError(field: any, form: string){
+
+    let formChange: FormGroup;
+
+    switch(form){
+      case 'representative':{
+        formChange = this.formRepresentative;
+        break;
+      }
+      case 'manager':{
+        formChange = this.formManager;
+        break;
+      }
+      case 'supervisor':{
+        formChange = this.formSupervisor;
+        break;
+      }
+      default:{
+        formChange = this.formCompany;
+      }
+    }
+
+    return formChange.get(field)?.invalid && formChange.get(field)?.touched
+  }
+
  }

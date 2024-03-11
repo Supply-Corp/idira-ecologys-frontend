@@ -11,13 +11,13 @@
       <ng-container [formGroup]="formCompany" >
         <div class="section">
           <div class="form-group">
-            <label for="">Nombre</label>
-            <input class="input" formControlName="name" type="text">
+            <label for="">Nombre <span [class.text-red]="getInputError('name','')">*</span></label>
+            <input class="input" formControlName="name" type="text" [class.input-error]="getInputError('name','')">
             <p *ngIf="getTypeError('name', 'required', '')" class="text-error"> campo requerido </p>
           </div>
           <div class="form-group">
-            <label for="">Email</label>
-            <input class="input" formControlName="email" type="text">
+            <label for="">Email <span [class.text-red]="getInputError('email','')">*</span></label>
+            <input class="input" formControlName="email" type="text" [class.input-error]="getInputError('email','')">
             <p *ngIf="getTypeError('email', 'required', '')" class="text-error"> campo requerido </p>
             <p *ngIf="getTypeError('email', 'email', '')" class="text-error"> formato de correo incorrecto </p>
           </div>
@@ -25,13 +25,13 @@
 
         <div class="section">
           <div class="form-group">
-            <label for="">Razón Social</label>
-            <input class="input" formControlName="razon_social" type="text">
+            <label for="">Razón Social <span [class.text-red]="getInputError('razon_social','')">*</span></label>
+            <input class="input" formControlName="razon_social" type="text" [class.input-error]="getInputError('razon_social','')">
             <p *ngIf="getTypeError('razon_social', 'required', '')" class="text-error"> campo requerido </p>
           </div>
           <div class="form-group">
-            <label for="">Ruc</label>
-            <input class="input" formControlName="ruc" type="text">
+            <label for="">Ruc <span [class.text-red]="getInputError('name','')">*</span></label>
+            <input class="input" formControlName="ruc" type="text" [class.input-error]="getInputError('ruc','')">
             <p *ngIf="getTypeError('ruc', 'required', '')" class="text-error"> campo requerido </p>
 
           </div>
@@ -39,22 +39,22 @@
 
         <div class="section">
           <div class="form-group">
-            <label for="">Distrito</label>
-            <input class="input" formControlName="distrito" type="text">
+            <label for="">Distrito <span [class.text-red]="getInputError('distrito','')">*</span></label>
+            <input class="input" formControlName="distrito" type="text" [class.input-error]="getInputError('distrito','')">
             <p *ngIf="getTypeError('distrito', 'required', '')" class="text-error"> campo requerido </p>
 
           </div>
           <div class="form-group">
-            <label for="">Provincia</label>
-            <input class="input" formControlName="provincia" type="text">
+            <label for="">Provincia <span [class.text-red]="getInputError('provincia','')">*</span></label>
+            <input class="input" formControlName="provincia" type="text" [class.input-error]="getInputError('provincia','')">
             <p *ngIf="getTypeError('provincia', 'required', '')" class="text-error"> campo requerido </p>
           </div>
         </div>
 
         <div class="w-1/2 pr-3">
           <div class="form-group">
-            <label for="">Dirección</label>
-            <input class="input" formControlName="address" type="text">
+            <label for="">Dirección <span [class.text-red]="getInputError('address','')">*</span></label>
+            <input class="input" formControlName="address" type="text" [class.input-error]="getInputError('address','')">
             <p *ngIf="getTypeError('address', 'required', '')" class="text-error"> campo requerido </p>
           </div>
           <span></span>
@@ -69,15 +69,15 @@
 
           <div class="body">
             <div class="form-group">
-              <label for="">Nombre</label>
-              <input class="input" formControlName="name_representative" type="text">
+              <label for="">Nombre <span [class.text-red]="getInputError('name_representative','representative')">*</span></label>
+              <input class="input" formControlName="name_representative" type="text" [class.input-error]="getInputError('name_representative','representative')">
               <p *ngIf="getTypeError('name_representative', 'required', 'representative')" class="text-error"> campo requerido </p>
 
             </div>
 
             <div class="form-group">
-              <label for="">DNI</label>
-              <input class="input" formControlName="dni_representative" type="text">
+              <label for="">DNI <span [class.text-red]="getInputError('dni_representative','representative')">*</span></label>
+              <input class="input" formControlName="dni_representative" type="text" [class.input-error]="getInputError('dni_representative','representative')">
               <p *ngIf="getTypeError('dni_representative', 'required', 'representative')" class="text-error"> campo requerido </p>
 
             </div>
@@ -94,15 +94,15 @@
 
           <div class="body">
             <div class="form-group">
-              <label for="">Nombre</label>
-              <input class="input" formControlName="name_general_manager" type="text">
+              <label for="">Nombre <span [class.text-red]="getInputError('name_general_manager','manager')">*</span></label>
+              <input class="input" formControlName="name_general_manager" type="text" [class.input-error]="getInputError('name_general_manager','manager')" >
               <p *ngIf="getTypeError('name_general_manager', 'required', 'manager')" class="text-error"> campo requerido </p>
 
             </div>
 
             <div class="form-group">
-              <label for="">DNI</label>
-              <input class="input" formControlName="dni_general_manager" type="text">
+              <label for="">DNI <span [class.text-red]="getInputError('dni_general_manager','manager')">*</span></label>
+              <input class="input" formControlName="dni_general_manager" type="text" [class.input-error]="getInputError('dni_general_manager','manager')" >
               <p *ngIf="getTypeError('dni_general_manager', 'required', 'manager')" class="text-error"> campo requerido </p>
             </div>
 
@@ -118,14 +118,14 @@
 
           <div class="body">
             <div class="form-group">
-              <label for="">Nombre</label>
-              <input class="input" formControlName="name_supervisor" type="text">
+              <label for="">Nombre <span [class.text-red]="getInputError('name_supervisor','supervisor')">*</span></label>
+              <input class="input" formControlName="name_supervisor" type="text" [class.input-error]="getInputError('name_supervisor','supervisor')" >
               <p *ngIf="getTypeError('name_supervisor', 'required', 'supervisor')" class="text-error"> campo requerido </p>
             </div>
 
             <div class="form-group">
-              <label for="">DNI</label>
-              <input class="input" formControlName="dni_supervisor" type="text">
+              <label for="">DNI <span [class.text-red]="getInputError('dni_supervisor','supervisor')">*</span></label>
+              <input class="input" formControlName="dni_supervisor" type="text" [class.input-error]="getInputError('dni_supervisor','supervisor')" >
               <p *ngIf="getTypeError('dni_supervisor', 'required', 'supervisor')" class="text-error"> campo requerido </p>
             </div>
 

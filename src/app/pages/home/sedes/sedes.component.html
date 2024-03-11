@@ -1,6 +1,9 @@
 <div class="temp-sedes">
-  <h1 class="text-center font-semibold">Sedes</h1>
 
+  <div class="content-title">
+    <button class="justify-self-start" [routerLink]="['/home/companies']"> <mat-icon class="material-symbols-rounded">arrow_back</mat-icon> </button>
+    <h1 class="text-center font-semibold">Sedes</h1>
+  </div>
 
   <div class="flex w-full justify-end ">
     <button class="btn-green" [routerLink]="['/home/sedes/', sedeData().companyId,'manage']">

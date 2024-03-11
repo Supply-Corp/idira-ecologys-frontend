@@ -54,8 +54,10 @@ export default class SedesManageComponent {
 
 
   getTypeError(field: any, type: any) {
-
     return this.formSedes.get(field)?.invalid && this.formSedes.get(field)?.touched && this.formSedes.get(field)?.hasError(type)
   }
 
+  getInputError(field: any){
+    return this.formSedes.get(field)?.invalid && this.formSedes.get(field)?.touched
+  }
 }
