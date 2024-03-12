@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex w-full mt-5 justify-end">
-        <button class="btn-green" [disabled]="sedeData().loading" (click)="createSede()" > Crear <mat-icon *ngIf="sedeData().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon>  </button>
+        <button class="btn-green" [disabled]="sedeData().loading" (click)="sede() ? updateSede() : createSede()" > {{sede() ? 'Editar' : 'Crear' }}  <mat-icon *ngIf="sedeData().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon>  </button>
       </div>
     </div>
   </div>

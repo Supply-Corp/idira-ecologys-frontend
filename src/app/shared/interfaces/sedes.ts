@@ -1,6 +1,7 @@
 import { Company } from "./companyResponse";
 
 export interface Sede{
+  id:number;
   name:      string;
   address:   string;
   email:     string;

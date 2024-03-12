@@ -138,7 +138,7 @@
       </div>
 
       <div class="flex w-full mt-5 justify-end">
-        <button class="btn-green" [disabled]="companyData().loading" (click)="CreateCompany()"> Crear <mat-icon *ngIf="companyData().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon> </button>
+        <button class="btn-green" [disabled]="companyData().loading" (click)="company() ? UpdateCompany() : CreateCompany()"> {{company() ? 'Editar' : 'Crear' }} <mat-icon *ngIf="companyData().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon> </button>
       </div>
     </div>
   </div>

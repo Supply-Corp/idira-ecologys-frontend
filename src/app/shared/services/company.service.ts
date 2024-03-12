@@ -45,6 +45,27 @@ export class CompanyService {
     });
   }
 
+  getCompany(id:number):Observable<Company>{
+    this.#companyData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.get<Company>(`${this.urlApi}/company/${id}`);
+    this.#companyData.update(
+      value=> ({...value, loading:false})
+    );
+    return response;
+  }
+
+  updateCompany(id:number,data:any){
+    this.#companyData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.put<Company>(`${this.urlApi}/company/${id}`,data);
+    return response;
+  }
+
   create(data: any) {
 
     this.#companyData.update(

@@ -34,7 +34,7 @@ export class SedeService {
       value=> ({...value, loading:true, companyId:id})
     );
 
-    return this.http.get<SedeResponse>(`${this.urlApi}/sede/${id}?page=1&limit=10`)
+    return this.http.get<SedeResponse>(`${this.urlApi}/sede/company/${id}?page=1&limit=10`)
       .pipe(
         map(
           data=> {
@@ -47,6 +47,18 @@ export class SedeService {
       )
   }
 
+  getSede(id:number):Observable<Sede>{
+    this.#sedeData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.get<Sede>(`${this.urlApi}/sede/${id}`);
+    this.#sedeData.update(
+      value=> ({...value, loading:false})
+    );
+    return response;
+  }
+
   create(data:any){
     this.#sedeData.update(
       value=> ({...value, loading:true})
@@ -56,6 +68,15 @@ export class SedeService {
       value=> ({...value, loading:false})
     );
     return result;
+  }
+
+  updateSede(id:number,data:any){
+    this.#sedeData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.put<Sede>(`${this.urlApi}/sede/${id}`,data);
+    return response;
   }
 
   delete(id:number):Observable<Object>{

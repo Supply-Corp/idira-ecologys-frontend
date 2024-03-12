@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {  MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CompanyService, CompanyServiceData } from '@services/company.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Company } from '@interfaces/companyResponse';
+import { Company, SubManager } from '@interfaces/companyResponse';
+import { switchMap, tap } from 'rxjs';
+import { SedeService } from '@services/sede.service';
 
 @Component({
   selector: 'app-company-manage',
@@ -24,6 +26,7 @@ import { Company } from '@interfaces/companyResponse';
 })
 export default class CompanyManageComponent {
 
+  private routeActive = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder);
   private companyService = inject(CompanyService);
   public companyData = computed<CompanyServiceData>(()=>this.companyService.companyData());
@@ -32,6 +35,20 @@ export default class CompanyManageComponent {
   constructor(){
 
   }
+
+  company = toSignal(
+    this.routeActive.params.pipe(
+      switchMap(({ id }) => this.companyService.getCompany(id).pipe(
+        tap(data=>{
+          console.log(data)
+          this.formCompany.patchValue(data);
+          this.setDataFormRepresentative(data.Representative!);
+          this.setDataManager(data.GeneralManager!);
+          this.setDataSupervisor(data.Supervisor!)
+        })
+      )),
+    )
+  );
 
 
   formCompany = this.formBuilder.group({
@@ -94,6 +111,38 @@ export default class CompanyManageComponent {
 
   }
 
+  UpdateCompany(){
+    if (
+      this.formCompany.invalid ||
+      this.formRepresentative.invalid ||
+      this.formSupervisor.invalid ||
+      this.formManager.invalid
+    ) {
+      this.formCompany.markAllAsTouched();
+      this.formRepresentative.markAllAsTouched();
+      this.formSupervisor.markAllAsTouched();
+      this.formManager.markAllAsTouched();
+      return;
+    }
+
+    this.companyService.updateCompany(
+      this.company()!.id,
+      {
+      ...this.formCompany.value,
+      ...this.formRepresentative.value,
+      ...this.formManager.value,
+      ...this.formSupervisor.value
+    }).subscribe(
+      {
+        next:(value)=>{
+          this.companyService.get();
+          this.router.navigate(['/home/companies']);
+          console.log(value)
+        }
+      }
+    )
+  }
+
   getTypeError(field: any, type: any, form: string) {
     let formChange: FormGroup;
 
@@ -141,6 +190,30 @@ export default class CompanyManageComponent {
     }
 
     return formChange.get(field)?.invalid && formChange.get(field)?.touched
+  }
+
+  setDataFormRepresentative(data:SubManager){
+    this.formRepresentative.patchValue({
+      dni_representative: data.dni,
+      email_representative:data.email,
+      name_representative:data.name
+    })
+  }
+
+  setDataManager(data:SubManager){
+    this.formManager.patchValue({
+      dni_general_manager: data.dni,
+      email_general_manager:data.email,
+      name_general_manager:data.name
+    })
+  }
+
+  setDataSupervisor(data:SubManager){
+    this.formSupervisor.patchValue({
+      dni_supervisor: data.dni,
+      email_supervisor:data.email,
+      name_supervisor:data.name
+    })
   }
 
  }
