@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from '@environment/environment';
 import { Sede, SedePayload, SedeResponse } from '@interfaces/sedes';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 
 export interface SedeServiceData{
@@ -47,7 +47,9 @@ export class SedeService {
       )
   }
 
-  getSede(id:number):Observable<Sede>{
+  getSede(id:number):Observable<Sede | null>{
+    if(!id){return of(null)};
+
     this.#sedeData.update(
       value=> ({...value, loading:true})
     );

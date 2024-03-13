@@ -36,15 +36,16 @@ export default class CompanyManageComponent {
 
   }
 
-  company = toSignal(
+  company = toSignal<any>(
     this.routeActive.params.pipe(
       switchMap(({ id }) => this.companyService.getCompany(id).pipe(
         tap(data=>{
-          console.log(data)
-          this.formCompany.patchValue(data);
-          this.setDataFormRepresentative(data.Representative!);
-          this.setDataManager(data.GeneralManager!);
-          this.setDataSupervisor(data.Supervisor!)
+          if(data){
+            this.formCompany.patchValue(data!);
+            this.setDataFormRepresentative(data!.Representative!);
+            this.setDataManager(data!.GeneralManager!);
+            this.setDataSupervisor(data!.Supervisor!)
+          }
         })
       )),
     )
@@ -126,7 +127,7 @@ export default class CompanyManageComponent {
     }
 
     this.companyService.updateCompany(
-      this.company()!.id,
+      this.company().id,
       {
       ...this.formCompany.value,
       ...this.formRepresentative.value,

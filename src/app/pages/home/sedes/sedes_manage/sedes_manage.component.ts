@@ -35,8 +35,9 @@ export default class SedesManageComponent {
     this.routeActive.params.pipe(
       switchMap(({ sedeId }) => this.sedeService.getSede(sedeId).pipe(
         tap(data=>{
-          console.log(data)
-          this.formSedes.patchValue(data);
+          if(data){
+            this.formSedes.patchValue(data!);
+          }
         })
       )),
     )

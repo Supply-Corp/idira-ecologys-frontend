@@ -3,7 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { environment } from '@environment/environment';
 import { Company, CompanyResponse } from '@interfaces/companyResponse';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 
 export interface CompanyServiceData{
   loading:boolean,
@@ -45,7 +45,8 @@ export class CompanyService {
     });
   }
 
-  getCompany(id:number):Observable<Company>{
+  getCompany(id:number):Observable<Company | null>{
+    if(!id){return of(null)};
     this.#companyData.update(
       value=> ({...value, loading:true})
     );
