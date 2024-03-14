@@ -1,40 +1,75 @@
 <div class="temp-user-manage">
   <div class="content-title">
-    <button class="justify-self-start" routerLink="/home/users"> <mat-icon>arrow_back</mat-icon> </button>
+    <button class="justify-self-start" routerLink="/home/users"> <mat-icon  class="material-symbols-rounded">arrow_back</mat-icon> </button>
     <h1 class="text-center font-semibold">Usuario</h1>
   </div>
 
   <div class="card">
     <div class="title">Datos principales</div>
 
-    <div class="body !py-7">
+    <div class="body !py-7" [formGroup]="form">
       <div class="section">
         <div class="form-group">
           <label for="">Nombre</label>
-          <input class="input" type="text">
+          <input class="input" formControlName="name" type="text">
+          <p *ngIf="getTypeError('name', 'required')" class="text-error"> campo requerido </p>
         </div>
         <div class="form-group">
           <label for="">Email</label>
-          <input class="input" type="text">
+          <input class="input" formControlName="email" type="text">
+          <p *ngIf="getTypeError('email', 'required')" class="text-error"> campo requerido </p>
+          <p *ngIf="getTypeError('email', 'email')" class="text-error"> formato de correo incorrecto  </p>
         </div>
       </div>
 
-      <div class="w-1/2 pr-3">
+      <div class="section">
         <div class="form-group">
+          <label for="">Contraseña</label>
+          <input class="input" formControlName="password" type="password">
+          <p *ngIf="getTypeError('password', 'required')" class="text-error"> campo requerido </p>
+          <p *ngIf="getTypeError('password', 'minlength')" class="text-error"> minimo 8 caracteres </p>
+        </div>
+
+        <div class="form-group !items-end">
+          <label for="">Rol</label>
           <mat-form-field>
-            <mat-label>Rol</mat-label>
-            <mat-select>
-              <mat-option value="volvo">ADMIN</mat-option>
-              <mat-option value="saab">USER</mat-option>
-              <mat-option value="mercedes">SEDE</mat-option>
+            <mat-label></mat-label>
+            <mat-select formControlName="role">
+              <mat-option value="ADMIN">ADMIN</mat-option>
+              <mat-option value="USER">USER</mat-option>
+              <mat-option value="SEDE">SEDE</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p *ngIf="getTypeError('role', 'required')" class="text-error"> campo requerido </p>
+
+        </div>
+      </div>
+
+      <div class="section" *ngIf="roleChange() == roles.SEDE" >
+        <div class="form-group">
+          <label for="">Empresa</label>
+          <mat-form-field >
+            <mat-label></mat-label>
+            <mat-select (valueChange)="getSedeById($event)">
+                <mat-option *ngFor="let company of dataCompanies()" [value]="company.id">{{company.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <span></span>
+
+        <div class="form-group">
+          <label for="">Sede</label>
+          <mat-form-field >
+            <mat-label></mat-label>
+            <mat-select formControlName="sedeId" >
+              <mat-option *ngFor="let sede of sedes()" [value]="sede.id">{{sede.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p *ngIf="getTypeError('sedeId', 'required')" class="text-error"> campo requerido </p>
+        </div>
       </div>
 
       <div class="flex w-full mt-5 justify-end">
-        <button class="btn-green"> Crear </button>
+        <button class="btn-green" (click)="createUser()" > Crear <mat-icon *ngIf="dataUser().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon> </button>
       </div>
     </div>
   </div>
