@@ -101,7 +101,7 @@ export default class UserManageComponent {
     console.log(this.form.value)
     this.userService.create(finalForm).subscribe(
       value=>{
-        console.log(value)
+        this.userService.getUsers()
         this.router.navigate(['/home/users']);
       }
     )

@@ -63,12 +63,12 @@ import { Roles } from "@interfaces/roles"
   const CompanyRoutes:MenuRoute[] = [
     AnunciosRoute,
     EmpresasRoute,
+    DocumentosRoute,
     PerfilRoute
   ];
 
   const SedeRoutes:MenuRoute[] = [
     AnunciosRoute,
-    EmpresasRoute,
     DocumentosRoute,
     ActividadesMensualesRoute,
     PerfilRoute

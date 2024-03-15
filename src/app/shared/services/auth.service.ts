@@ -34,7 +34,8 @@ export class AuthService {
     const result = this.http.post(`${this.urlApi}/auth/login`, data).pipe(
       tap((value:any)=>{
         localStorage.setItem('token', value?.token)
-        this.#authData.update(value=> ({...value, user:value.user}))
+        console.log(value)
+        this.#authData.update(data=> ({...data, user:value.user}))
       })
     );
     this.#authData.update(
