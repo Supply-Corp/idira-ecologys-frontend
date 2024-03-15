@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from '@environment/environment';
+import { User } from '@interfaces/user';
+import { tap } from 'rxjs';
 
 
 export interface AuthDataService{
   loading:boolean,
+  user:User | null
 }
 
 @Injectable({
@@ -17,6 +20,7 @@ export class AuthService {
 
 
   #authData = signal<AuthDataService>({
+    user: null,
     loading:false,
   })
 
@@ -25,11 +29,16 @@ export class AuthService {
   login(data: any) {
 
     this.#authData.update(
-      value=> ({loading:true})
+      value=> ({...value,loading:true})
     );
-    const result = this.http.post(`${this.urlApi}/auth/login`, data);
+    const result = this.http.post(`${this.urlApi}/auth/login`, data).pipe(
+      tap((value:any)=>{
+        localStorage.setItem('token', value?.token)
+        this.#authData.update(value=> ({...value, user:value.user}))
+      })
+    );
     this.#authData.update(
-      value=> ({loading:false})
+      value=> ({...value,loading:false})
     );
     return result;
   }
