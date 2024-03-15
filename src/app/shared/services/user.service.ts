@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from '@environment/environment';
 import { User, UserResponse } from '@interfaces/user';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 export interface UserServiceData{
@@ -42,6 +42,20 @@ export class UserService {
     });
   }
 
+  getById(id:number):Observable<User | null>{
+    if(!id){return of(null)};
+
+    this.#userData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.get<User>(`${this.urlApi}/users/${id}`);
+    this.#userData.update(
+      value=> ({...value, loading:false})
+    );
+    return response;
+  }
+
   create(data:any){
     this.#userData.update(
       value=> ({...value, loading:true})
@@ -51,6 +65,15 @@ export class UserService {
       value=> ({...value, loading:false})
     );
     return result;
+  }
+
+  update(id:number,data:any){
+    this.#userData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.put<User>(`${this.urlApi}/users/${id}`,data);
+    return response;
   }
 
   delete(id:number):Observable<Object>{

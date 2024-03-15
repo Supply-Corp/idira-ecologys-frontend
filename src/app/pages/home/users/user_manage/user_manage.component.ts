@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { Roles } from '@interfaces/roles';
 import { CompanyService } from '@services/company.service';
 import { Company } from '@interfaces/companyResponse';
@@ -35,6 +35,7 @@ export default class UserManageComponent {
   private companyService = inject(CompanyService);
   private sedeService = inject(SedeService);
   private userService = inject(UserService);
+  private routeActive = inject(ActivatedRoute);
   private router = inject(Router);
 
   public companyData = this.companyService.companyData;
@@ -68,6 +69,24 @@ export default class UserManageComponent {
   ));
 
 
+  user = toSignal(
+    this.routeActive.params.pipe(
+      switchMap(({ id }) => this.userService.getById(id).pipe(
+        tap(data=>{
+          if(data){
+            this.form.patchValue(data!);
+
+            this.form.get('password')?.setValidators([]);
+            this.form.updateValueAndValidity();
+            this.form.get('password')?.reset()
+          }
+        })
+      )),
+    )
+  );
+
+
+
   createUser(){
     if (
       this.form.invalid
@@ -75,10 +94,34 @@ export default class UserManageComponent {
       this.form.markAllAsTouched();
       return;
     }
+    const finalForm = {...this.form.value};
+    if(finalForm.role != this.roles.SEDE){
+      finalForm.sedeId = '';
+    }
     console.log(this.form.value)
-    this.userService.create(this.form.value).subscribe(
+    this.userService.create(finalForm).subscribe(
       value=>{
         console.log(value)
+        this.router.navigate(['/home/users']);
+      }
+    )
+  }
+
+  updateUser(){
+    if (
+      this.form.invalid
+    ) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    const finalForm = {...this.form.value};
+    if(finalForm.role != this.roles.SEDE){
+      finalForm.sedeId = '';
+    }
+    console.log(this.form.value)
+    this.userService.update(this.user()!.id,finalForm).subscribe(
+      value=>{
+        this.userService.getUsers()
         this.router.navigate(['/home/users']);
       }
     )

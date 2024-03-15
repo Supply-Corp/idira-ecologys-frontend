@@ -23,9 +23,9 @@
       </div>
 
       <div class="section">
-        <div class="form-group">
+        <div class="form-group" [class.input-disabled]="user()">
           <label for="">Contraseña</label>
-          <input class="input" formControlName="password" type="password">
+          <input class="input" [readOnly]="user()?.email" formControlName="password" type="password"  >
           <p *ngIf="getTypeError('password', 'required')" class="text-error"> campo requerido </p>
           <p *ngIf="getTypeError('password', 'minlength')" class="text-error"> minimo 8 caracteres </p>
         </div>
@@ -69,7 +69,7 @@
       </div>
 
       <div class="flex w-full mt-5 justify-end">
-        <button class="btn-green" (click)="createUser()" > Crear <mat-icon *ngIf="dataUser().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon> </button>
+        <button class="btn-green" (click)="user() ?  updateUser() : createUser() " > {{user() ? 'Editar' : 'Crear' }}  <mat-icon *ngIf="dataUser().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon> </button>
       </div>
     </div>
   </div>

@@ -59,6 +59,10 @@ export const routes: Routes = [
             path:'manage',
             loadComponent: () => import('./pages/home/users/user_manage/user_manage.component')
           },
+          {
+            path:'manage/:id',
+            loadComponent: () => import('./pages/home/users/user_manage/user_manage.component')
+          }
         ]
       },
       {

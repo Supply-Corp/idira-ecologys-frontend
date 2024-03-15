@@ -86,6 +86,12 @@
   grid-template-columns: max-content auto;
 }
 
+.input-disabled{
+  label, input{
+    color: #c6cbcc;
+  }
+}
+
 // * BUTTONS
 
 .btn{
