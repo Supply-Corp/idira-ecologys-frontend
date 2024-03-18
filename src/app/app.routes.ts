@@ -4,7 +4,9 @@ import { authGuard, unauthGuard } from '@shared/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    canActivate:[unauthGuard],
+    canActivate:[
+      unauthGuard
+    ],
     loadComponent: () => import("./pages/auth/login/login.component")
   },
   {
@@ -67,6 +69,23 @@ export const routes: Routes = [
           {
             path:'manage/:id',
             loadComponent: () => import('./pages/home/users/user_manage/user_manage.component')
+          }
+        ]
+      },
+      {
+        path:'categories',
+        children:[
+          {
+            path:'',
+            loadComponent: () => import('./pages/home/directory/directory.component')
+          },
+          {
+            path:'manage',
+            loadComponent: () => import('./pages/home/directory/directory_manage/directory_manage.component')
+          },
+          {
+            path:'manage/:id',
+            loadComponent: () => import('./pages/home/directory/directory_manage/directory_manage.component')
           }
         ]
       },

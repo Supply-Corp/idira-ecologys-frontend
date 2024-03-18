@@ -9,7 +9,7 @@ import { Roles } from "@interfaces/roles"
   };
 
   const CategoriasRoute: MenuRoute = {
-    title:'Categorías',
+    title:'Directorios',
     icon:'category',
     url:'/home/categories',
     extact:false
