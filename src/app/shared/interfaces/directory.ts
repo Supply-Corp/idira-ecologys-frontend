@@ -15,3 +15,20 @@ export interface Directory {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface SubDirectoryResponse{
+  page:    number;
+  limit:   number;
+  total:   number;
+  next:    null;
+  prev:    null;
+  results: SubDirectory[];
+}
+
+export interface SubDirectory{
+  id:          number;
+  name:        string;
+  directoryId: number;
+  state:       string;
+  Directory:   Directory;
+}

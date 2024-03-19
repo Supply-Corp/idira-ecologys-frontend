@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from '@environment/environment';
-import { Directory, DirectoryResponse } from '@interfaces/directory';
-import { Observable, of } from 'rxjs';
+import { Directory, DirectoryResponse, SubDirectory, SubDirectoryResponse } from '@interfaces/directory';
+import { Observable, map, of } from 'rxjs';
 
 export interface DirectoryServiceData{
   loading:boolean,
   directories:Directory[],
+}
+
+export interface SubDirectoryServiceData{
+  loading:boolean,
+  subdirectory:SubDirectory[],
+  directoryId:number | null
 }
 
 @Injectable({
@@ -25,7 +31,14 @@ export class DirectoriesService {
     directories:[],
   })
 
+  #subDirectoryData = signal<SubDirectoryServiceData>({
+    loading:false,
+    subdirectory:[],
+    directoryId:null
+  })
+
   public directoryData = computed(() => this.#directoryData());
+  public subDirectoryData = computed(() => this.#subDirectoryData());
 
   constructor() {
     this.#directoryData().directories.length == 0 && this.get();
@@ -89,16 +102,69 @@ export class DirectoriesService {
     return result;
   }
 
-  getSubDirectory(id:number):Observable<Directory | null>{
+
+
+  getSubDirectory(id:number):Observable<SubDirectory[] | null>{
+    if(!id){return of(null)};
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:true, directoryId:id})
+    );
+    return this.http.get<SubDirectoryResponse>(`${this.urlApi}/subdirectory/directory/${id}?page=1&limit=10`)
+    .pipe(
+      map(
+        data=> {
+          this.#subDirectoryData.update(
+            value=> ({...value,loading:false, subdirectory: data.results})
+          );
+          return data.results
+        }
+      )
+    )
+  }
+
+  getSubDirectoryById(id:number):Observable<SubDirectory | null>{
     if(!id){return of(null)};
     this.#directoryData.update(
       value=> ({...value, loading:true})
     );
 
-    const response = this.http.get<Directory>(`${this.urlApi}/directory/${id}`);
+    const response = this.http.get<SubDirectory>(`${this.urlApi}/subdirectory/${id}`);
     this.#directoryData.update(
       value=> ({...value, loading:false})
     );
     return response;
   }
+
+  createSubDirectory(data: any) {
+
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:true})
+    );
+    const result = this.http.post(`${this.urlApi}/subdirectory`, {...data, directoryId: parseInt(data.directoryId)});
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:false})
+    );
+    return result;
+  }
+
+  updateSubDirectory(id:number,data:any){
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.put<Directory>(`${this.urlApi}/subdirectory/${id}`, {...data, directoryId: parseInt(data.directoryId)});
+    return response;
+  }
+
+  deleteSubDirectory(id:number):Observable<Object>{
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:true})
+    );
+    const result = this.http.delete(`${this.urlApi}/subdirectory/${id}`);
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:false})
+    );
+    return result;
+  }
+
 }

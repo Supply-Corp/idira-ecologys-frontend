@@ -1,1 +1,54 @@
-<p>sub-directory works!</p>,
+<div class="temp-sedes">
+
+  <div class="content-title">
+    <button class="justify-self-start" [routerLink]="['/home/categories']"> <mat-icon class="material-symbols-rounded">arrow_back</mat-icon> </button>
+    <h1 class="text-center font-semibold">Sub Directorios</h1>
+  </div>
+
+  <div class="flex w-full justify-end ">
+    <button class="btn-green" [routerLink]="['manage']">
+      Crear
+    </button>
+</div>
+
+<div class="grid">
+  <table mat-table [dataSource]="subdirectories()">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="directory">
+      <th mat-header-cell *matHeaderCellDef> Directorio </th>
+      <td mat-cell *matCellDef="let element"> {{element.Directory.name}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="opt">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="flex gap-2">
+          <button class="btn-green btn-icon" matTooltip="Editar"> <mat-icon class="material-symbols-rounded" [routerLink]="['manage', element.id]">edit</mat-icon> </button>
+          <button class="btn-red btn-icon" matTooltip="Eliminar" (click)="deleteSede(element.id)" > <mat-icon class="material-symbols-rounded">delete_forever</mat-icon> </button>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  @if(subDirectoryData().loading){
+    <div class="grid justify-center">
+      <mat-spinner class="spinner"></mat-spinner>
+    </div>
+  }
+
+</div>
+</div>

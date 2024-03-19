@@ -86,9 +86,22 @@ export const routes: Routes = [
           {
             path:'manage/:id',
             loadComponent: () => import('./pages/home/directory/directory_manage/directory_manage.component')
-          }
+          },
+          {
+            path:'subdirectory/:id',
+            loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory.component')
+          },
+          {
+            path:'subdirectory/:id/manage',
+            loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory_manage/sub-directory_manage.component')
+          },
+          {
+            path:'subdirectory/:id/manage/:subDirId',
+            loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory_manage/sub-directory_manage.component')
+          },
         ]
       },
+
       {
         path:'documents',
         loadComponent: () => import('./pages/home/documents/documents.component')

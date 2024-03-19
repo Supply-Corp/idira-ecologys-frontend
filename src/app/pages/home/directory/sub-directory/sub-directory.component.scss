@@ -1,20 +1,6 @@
-.temp-sede-manage{
+.temp-sedes{
   padding: 10px 50px;
   display: grid;
   align-content: start;
   gap: 20px;
-  max-width: 900px;
-  margin: auto;
-
-  .card{
-    .form-group{
-      margin-bottom: 10px !important;
-    }
-  }
-
-  .section{
-    display: grid;
-    grid-auto-flow: column;
-    gap: 20px;
-  }
 }
