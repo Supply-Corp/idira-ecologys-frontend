@@ -99,6 +99,18 @@ export const routes: Routes = [
             path:'subdirectory/:id/manage/:subDirId',
             loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory_manage/sub-directory_manage.component')
           },
+          {
+            path:'subdirectory/:id/years/:subDirId',
+            loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory-year/sub-directory-year.component')
+          },
+          {
+            path:'subdirectory/:id/years/:subDirId/manage',
+            loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory-year/sub-directory-year_manage/sub-directory-year_manage.component')
+          },
+          {
+            path:'subdirectory/:id/years/:subDirId/manage/:subDirYearId',
+            loadComponent: () => import('./pages/home/directory/sub-directory/sub-directory-year/sub-directory-year_manage/sub-directory-year_manage.component')
+          },
         ]
       },
 

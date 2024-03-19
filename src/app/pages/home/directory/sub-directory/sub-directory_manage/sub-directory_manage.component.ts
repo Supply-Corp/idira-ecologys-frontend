@@ -78,6 +78,7 @@ export default class SubDirectoryManageComponent {
         next:(value)=>{
           this.directoriesService.getSubDirectory(this.subdirectoryData().directoryId!).subscribe();
           this.router.navigate(['/home/categories/subdirectory/',this.subdirectoryData().directoryId]);
+
         }
       }
     )

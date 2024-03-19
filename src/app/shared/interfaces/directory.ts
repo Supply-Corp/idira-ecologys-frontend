@@ -32,3 +32,22 @@ export interface SubDirectory{
   state:       string;
   Directory:   Directory;
 }
+
+export interface SubDirectoryYearResponse{
+  page:    number;
+  limit:   number;
+  total:   number;
+  next:    null;
+  prev:    null;
+  results: SubDirectoryYear[];
+}
+
+export interface SubDirectoryYear{
+  id:             number;
+  name:           string;
+  subDirectoryId: number;
+  state:          string;
+  SubDirectory:   SubDirectory;
+  createdAt:      Date;
+  updatedAt:      Date;
+}

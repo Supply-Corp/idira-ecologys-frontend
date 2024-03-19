@@ -1,0 +1,25 @@
+<div class="temp-sede-manage">
+  <div class="content-title">
+    <button class="justify-self-start" [routerLink]="[ subdirectoryYear() ? '../../' :'../']"> <mat-icon class="material-symbols-rounded">arrow_back</mat-icon> </button>
+    <h1 class="text-center font-semibold">Año Sub directorio</h1>
+  </div>
+
+  <div class="card">
+    <div class="title">Datos principales</div>
+
+    <div class="body !py-7" [formGroup]="formSubDirectoryYear" >
+      <div class="section">
+        <div class="form-group">
+          <label for="">Nombre <span [class.text-red]="getInputError('name')">*</span></label>
+          <input class="input" formControlName="name" type="text" [class.input-error]="getInputError('name')" >
+          <p *ngIf="getTypeError('name', 'required')" class="text-error"> campo requerido </p>
+
+        </div>
+      </div>
+
+      <div class="flex w-full mt-5 justify-end">
+        <button class="btn-green" [disabled]="subdirectoryYearData().loading" (click)="subdirectoryYear() ? update() : create()" > {{subdirectoryYear() ? 'Editar' : 'Crear' }}  <mat-icon *ngIf="subdirectoryYearData().loading" class="material-symbols-rounded spinner animate-spin">progress_activity</mat-icon>  </button>
+      </div>
+    </div>
+  </div>
+</div>

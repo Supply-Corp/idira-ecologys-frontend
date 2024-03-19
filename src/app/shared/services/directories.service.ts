@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from '@environment/environment';
-import { Directory, DirectoryResponse, SubDirectory, SubDirectoryResponse } from '@interfaces/directory';
+import { Directory, DirectoryResponse, SubDirectory, SubDirectoryResponse, SubDirectoryYear, SubDirectoryYearResponse } from '@interfaces/directory';
 import { Observable, map, of } from 'rxjs';
 
 export interface DirectoryServiceData{
@@ -13,6 +13,12 @@ export interface SubDirectoryServiceData{
   loading:boolean,
   subdirectory:SubDirectory[],
   directoryId:number | null
+}
+
+export interface SubDirectoryYearServiceData{
+  loading:boolean,
+  subdirectoryYear:SubDirectoryYear[],
+  subdirectoryId:number | null
 }
 
 @Injectable({
@@ -37,8 +43,15 @@ export class DirectoriesService {
     directoryId:null
   })
 
+  #subDirectoryYearData = signal<SubDirectoryYearServiceData>({
+    loading:false,
+    subdirectoryYear:[],
+    subdirectoryId:null
+  })
+
   public directoryData = computed(() => this.#directoryData());
   public subDirectoryData = computed(() => this.#subDirectoryData());
+  public subDirectoryYearData = computed(() => this.#subDirectoryYearData());
 
   constructor() {
     this.#directoryData().directories.length == 0 && this.get();
@@ -166,5 +179,70 @@ export class DirectoriesService {
     );
     return result;
   }
+
+
+  getSubDirectoryYear(id:number):Observable<SubDirectoryYear[] | null>{
+    if(!id){return of(null)};
+    this.#subDirectoryYearData.update(
+      value=> ({...value, loading:true, subdirectoryId:id})
+    );
+    return this.http.get<SubDirectoryYearResponse>(`${this.urlApi}/subdirectory-years/subdirectory/${id}?page=1&limit=10`)
+    .pipe(
+      map(
+        data=> {
+          this.#subDirectoryYearData.update(
+            value=> ({...value,loading:false, subdirectoryYear: data.results})
+          );
+          return data.results
+        }
+      )
+    )
+  }
+
+  getSubDirectoryYearById(id:number):Observable<SubDirectoryYear | null>{
+    if(!id){return of(null)};
+    this.#subDirectoryYearData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.get<SubDirectoryYear>(`${this.urlApi}/subdirectory-years/${id}`);
+    this.#subDirectoryYearData.update(
+      value=> ({...value, loading:false})
+    );
+    return response;
+  }
+
+  createSubDirectoryYear(data: any) {
+
+    this.#subDirectoryYearData.update(
+      value=> ({...value, loading:true})
+    );
+    const result = this.http.post(`${this.urlApi}/subdirectory-years`, {...data, subDirectoryId: parseInt(data.subDirectoryId)});
+    this.#subDirectoryYearData.update(
+      value=> ({...value, loading:false})
+    );
+    return result;
+  }
+
+  updateSubDirectoryYear(id:number,data:any){
+    this.#subDirectoryYearData.update(
+      value=> ({...value, loading:true})
+    );
+
+    const response = this.http.put<SubDirectoryYear>(`${this.urlApi}/subdirectory-years/${id}`, {...data, subDirectoryId: parseInt(data.subDirectoryId)});
+    return response;
+  }
+
+  deleteSubDirectoryYear(id:number):Observable<Object>{
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:true})
+    );
+    const result = this.http.delete(`${this.urlApi}/subdirectory-years/${id}`);
+    this.#subDirectoryData.update(
+      value=> ({...value, loading:false})
+    );
+    return result;
+  }
+
 
 }
