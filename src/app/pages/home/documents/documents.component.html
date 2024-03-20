@@ -1,3 +1,48 @@
-<div class="temp-sedes">
-  <h1 class="text-center font-semibold">SEDES</h1>
+<div class="temp-document">
+  <h1 class="text-center font-semibold">{{directory() && !subdirectory() ? directory()!.name : subdirectory() ? subdirectory()!.name : 'Documentos'}}</h1>
+
+
+  @if(loading()){
+    <div class="grid justify-center">
+      <mat-spinner class="spinner"></mat-spinner>
+    </div>
+  }
+  @else {
+
+      @if(!subDirectories()){
+
+        <div class="document-list">
+          <div class="card" *ngFor="let directory of dataSource()">
+            <div class="body" (click)="getSubDocument(directory)">
+              <mat-icon class="material-symbols-rounded !w-[22px] !h-[22px] text-[22px]">folder</mat-icon>
+              <span class="text-[14px]"> {{directory.name}} </span>
+            </div>
+          </div>
+        </div>
+      }@else if(subDirectories() && !subDirectoriesYear()){
+        <button class="justify-self-start" (click)="returnToDirectory()"> <mat-icon class="material-symbols-rounded" >arrow_back</mat-icon> </button>
+
+        <div class="document-list">
+          <div class="card" *ngFor="let directory of subDirectories()" (click)="getSubDocumentYear(directory)">
+            <div class="body" >
+              <mat-icon class="material-symbols-rounded !w-[22px] !h-[22px] text-[22px]">folder</mat-icon>
+              <span class="text-[14px]"> {{directory.name}} </span>
+            </div>
+          </div>
+        </div>
+      }@else{
+        <button class="justify-self-start" (click)="returnToSubDirectory()"> <mat-icon class="material-symbols-rounded" >arrow_back</mat-icon> </button>
+
+        <div class="document-list">
+          <div class="card" *ngFor="let directory of subDirectoriesYear()">
+            <div class="body" >
+              <mat-icon class="material-symbols-rounded !w-[22px] !h-[22px] text-[22px]">folder</mat-icon>
+              <span class="text-[14px]"> {{directory.name}} </span>
+            </div>
+          </div>
+        </div>
+      }
+
+  }
+
 </div>
