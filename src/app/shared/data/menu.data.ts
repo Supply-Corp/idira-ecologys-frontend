@@ -55,15 +55,15 @@ import { Roles } from "@interfaces/roles"
     CategoriasRoute,
     EmpresasRoute,
     UsuariosRoute,
-    DocumentosRoute,
-    ActividadesMensualesRoute,
+    // DocumentosRoute,
+    // ActividadesMensualesRoute,
     PerfilRoute
   ];
 
   const CompanyRoutes:MenuRoute[] = [
     AnunciosRoute,
     EmpresasRoute,
-    DocumentosRoute,
+    // DocumentosRoute,
     PerfilRoute
   ];
 
